@@ -1,7 +1,7 @@
 # personal-project
 EDA - 2 1/2 week project. Travel planner
 
-# Project Plan Template
+# Project Plan
 
 4 pages
 
