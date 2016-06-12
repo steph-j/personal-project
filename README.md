@@ -50,7 +50,7 @@ ES6, HTML, CSS, Webpack
 
 ## Milestones
 
--By the end of the weekend: Basic UI and links setup.
+-By the end of the weekend: Basic UI and links setup. CHECK
 
 -Templates and DB working by 16 June
 
