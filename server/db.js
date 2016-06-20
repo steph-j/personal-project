@@ -6,17 +6,14 @@ module.exports = {
 }
 
 function getTravelInfo() {
-  knex('trips')
-    .select()
-    .then(function (info) {
-      info = {
-        info: info
-      }
-      console.log(info);
+  return knex('trips')
+    .then(function (trip) {
+      console.log(trip);
+      return trip
     })
 }
 
-getTravelInfo()
+// getTravelInfo()
 
 
 // knex

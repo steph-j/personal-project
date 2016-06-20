@@ -9,7 +9,10 @@ router.get('/', function (req, res) {
 })
 
 router.get('/trips', function (req, res) {
-  res.json(db.getTravelInfo())
+  db.getTravelInfo()
+    .then(function (result) {
+      res.json(result)
+    })
 })
 
 module.exports = router
