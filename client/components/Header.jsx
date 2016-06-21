@@ -1,10 +1,18 @@
-<header>
-<h3>Travel Mania</h3>
-</header>
+import React from 'react'
 
-<div class="Login">
-  <form action="/info" method="post">
-    <input name="name" value="" placeholder="user name">
-    <button type="button" name="button">Sign In</button>
-  </form>
-</div>
+export default React.createClass({
+  render() {
+    return (
+      <header>
+      <h3>Travel Mania</h3>
+
+      <div class="Login">
+       <form action="/info" method="post">
+       <input name="name" value="" placeholder="user name" />
+       <button type="button" name="button">Sign In</button>
+       </form>
+       </div>
+      </header>
+    )
+  }
+})

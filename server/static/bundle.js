@@ -20418,18 +20418,53 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Travel '
+	        'a',
+	        { href: '#' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Past Trips'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { href: '/destination' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Current Trips'
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { href: '#' },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Future Trips'
+	          )
+	        )
 	      )
 	    )
+	
 	    // <div class="container">
 	    //   <div class="home">
 	    //   <div class="row">
 	    //     <a href="#"><div><h2>Past Trips</h2></div></a>
 	    //   </div>
 	    //   <div class="row">
-	    //     <a href="./destination"><div><h2>Current Trips</h2></div></a>
+	    //     <a href="/destination"><div><h2>Current Trips</h2></div></a>
 	    //   </div>
 	    //   <div class="row">
 	    //     <a href="#"><div><h2>Future Trips</h2></div></a>
