@@ -20405,7 +20405,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _api = __webpack_require__(169);
+	var _Header = __webpack_require__(169);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _api = __webpack_require__(170);
 	
 	var _api2 = _interopRequireDefault(_api);
 	
@@ -20417,61 +20421,9 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'a',
-	        { href: '#' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Past Trips'
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'a',
-	        { href: '/destination' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Current Trips'
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'a',
-	        { href: '#' },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'h2',
-	            null,
-	            'Future Trips'
-	          )
-	        )
-	      )
-	    )
-	
-	    // <div class="container">
-	    //   <div class="home">
-	    //   <div class="row">
-	    //     <a href="#"><div><h2>Past Trips</h2></div></a>
-	    //   </div>
-	    //   <div class="row">
-	    //     <a href="/destination"><div><h2>Current Trips</h2></div></a>
-	    //   </div>
-	    //   <div class="row">
-	    //     <a href="#"><div><h2>Future Trips</h2></div></a>
-	    //   </div>
-	    //   </div>
-	    // </div>
-	    ;
+	      _react2.default.createElement(_Header2.default, null),
+	      _react2.default.createElement(Dest, null)
+	    );
 	  }
 	});
 
@@ -20479,9 +20431,54 @@
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: "Header",
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "header",
+	      null,
+	      _react2.default.createElement(
+	        "h3",
+	        null,
+	        "Travel Mania"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { "class": "Login" },
+	        _react2.default.createElement(
+	          "form",
+	          { action: "/info", method: "post" },
+	          _react2.default.createElement("input", { name: "name", value: "", placeholder: "user name" }),
+	          _react2.default.createElement(
+	            "button",
+	            { type: "button", name: "button" },
+	            "Sign In"
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
-	var _superagent = __webpack_require__(170);
+	var _superagent = __webpack_require__(171);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -20504,7 +20501,7 @@
 	}
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20513,10 +20510,10 @@
 	 * Module dependencies.
 	 */
 	
-	var Emitter = __webpack_require__(171);
-	var reduce = __webpack_require__(172);
-	var requestBase = __webpack_require__(173);
-	var isObject = __webpack_require__(174);
+	var Emitter = __webpack_require__(172);
+	var reduce = __webpack_require__(173);
+	var requestBase = __webpack_require__(174);
+	var isObject = __webpack_require__(175);
 	
 	/**
 	 * Root reference for iframes.
@@ -20544,7 +20541,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(175).bind(null, Request);
+	var request = module.exports = __webpack_require__(176).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -21494,7 +21491,7 @@
 	};
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21658,7 +21655,7 @@
 	};
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21686,7 +21683,7 @@
 	};
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21694,7 +21691,7 @@
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(174);
+	var isObject = __webpack_require__(175);
 	
 	/**
 	 * Clear previous timeout.
@@ -22036,7 +22033,7 @@
 	};
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22058,7 +22055,7 @@
 	module.exports = isObject;
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
