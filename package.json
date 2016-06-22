@@ -36,8 +36,10 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "knex": "^0.11.5",
-    "superagent": "^2.0.0",
-    "sqlite3": "^3.1.4"
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "sqlite3": "^3.1.4",
+    "superagent": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

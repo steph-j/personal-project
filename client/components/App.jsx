@@ -1,14 +1,15 @@
 import React from 'react'
 import Header from './Header'
+import DestinationContainer from '../container/destinationContainer'
 
-import api from '../api'
+
 
 export default React.createClass({
   render() {
     return (
       <div>
     <Header />
-    <Dest />
+    <destinationContainer />
     </div>
     )
   }
