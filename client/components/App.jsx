@@ -7,9 +7,9 @@ import DestinationContainer from '../container/destinationContainer'
 export default React.createClass({
   render() {
     return (
-      <div>
+      <div className="app">
     <Header />
-    <destinationContainer />
+    <DestinationContainer />
     </div>
     )
   }

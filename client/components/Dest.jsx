@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default () => {
+export default (props) => {
   return (
 <div className='destination'>
-  <h1>You're neary on your way to: {props.destination.destination}</h1>
+  <h1>You're nearly on your way to: {props.selectedDesination.destination}</h1>
 
-  <p>{props.destination.description}</p>
+  <p>{props.selectedDesination.description}</p>
 
   <div class="container">
     <div class="destination-menu">
@@ -14,7 +14,7 @@ export default () => {
         <a href="#"><h3>Important Info</h3></a>
       </div>
       <div class="six columns">
-        <a href="#"><h3>Expenses</h3></a>
+        <a href="#"><h3>Expenses!</h3></a>
       </div>
     </div>
     <div class="row">

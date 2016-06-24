@@ -54,13 +54,32 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _redux = __webpack_require__(185);
+	
+	var _actions = __webpack_require__(201);
+	
 	var _App = __webpack_require__(168);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
+	var _reducer = __webpack_require__(202);
+	
+	var _reducer2 = _interopRequireDefault(_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('App'));
+	var store = (0, _redux.createStore)(_reducer2.default);
+	
+	store.dispatch((0, _actions.showDestination)(1));
+	console.log(store.getState());
+	
+	_reactDom2.default.render(_react2.default.createElement(
+	  _reactRedux.Provider,
+	  { store: store },
+	  _react2.default.createElement(_App2.default, null)
+	), document.getElementById('App'));
 
 /***/ },
 /* 1 */
@@ -20420,9 +20439,9 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'app' },
 	      _react2.default.createElement(_Header2.default, null),
-	      _react2.default.createElement('destinationContainer', null)
+	      _react2.default.createElement(_destinationContainer2.default, null)
 	    );
 	  }
 	});
@@ -20501,14 +20520,14 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    things: state.destination
+	    selectedDesination: state.selectedDesination
 	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    requestAPI: function requestAPI(id) {
-	      dispatch(actions.requestAPI(id));
+	    showDestination: function showDestination(id) {
+	      dispatch(actions.showDestination(id));
 	    }
 	  };
 	};
@@ -22143,20 +22162,20 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function () {
+	exports.default = function (props) {
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'destination' },
 	    _react2.default.createElement(
 	      'h1',
 	      null,
-	      'You\'re neary on your way to: ',
-	      props.destination.destination
+	      'You\'re nearly on your way to: ',
+	      props.selectedDesination.destination
 	    ),
 	    _react2.default.createElement(
 	      'p',
 	      null,
-	      props.destination.description
+	      props.selectedDesination.description
 	    ),
 	    _react2.default.createElement(
 	      'div',
@@ -22189,7 +22208,7 @@
 	              _react2.default.createElement(
 	                'h3',
 	                null,
-	                'Expenses'
+	                'Expenses!'
 	              )
 	            )
 	          )
@@ -22239,14 +22258,55 @@
 	  value: true
 	});
 	exports.showDestination = showDestination;
+	exports.requestAPI = requestAPI;
 	var SHOW_DESTINATION = exports.SHOW_DESTINATION = 'SHOW_DESTINATION';
 	
-	function showDestination() {
+	function showDestination(id) {
 	  return {
 	    type: SHOW_DESTINATION,
 	    id: id
 	  };
 	}
+	
+	function requestAPI() {}
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _actions = __webpack_require__(201);
+	
+	var INITIAL_STATE = {
+	  selectedDesination: null,
+	  destinations: [{
+	    id: 1,
+	    destination: 'Timbuktu',
+	    description: 'Choochoo'
+	  }]
+	};
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? INITIAL_STATE : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _actions.SHOW_DESTINATION:
+	      return Object.assign({}, state, {
+	        selectedDesination: state.destinations.filter(function (destination) {
+	          return action.id === destination.id;
+	        })[0]
+	      });
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
 
 /***/ }
 /******/ ]);

@@ -5,14 +5,14 @@ import {showDestination} from '../actions'
 
 const mapStateToProps = (state) => {
   return{
-    things: state.destination
+    selectedDesination: state.selectedDesination
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    requestAPI: (id) => {
-      dispatch(actions.requestAPI(id))
+    showDestination: (id) => {
+      dispatch(actions.showDestination(id))
   }
   }
 }
