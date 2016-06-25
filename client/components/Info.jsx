@@ -1,22 +1,27 @@
+import React from 'react'
+
+export default (props) => {
+  return (
+<div>
 <h1>Important Info</h1>
 
 
-<p>Flight Info: </p>
-<p>Passport Exp: </p>
-<p>Dates: </p>
-<p>Length of Stay: </p>
-<p>Visa Required: </p>
-<p>Insurance Policy: </p>
-<p>Hotel Address: </p>
-<p>Tour Booked: </p>
-<p>Expenses: </p>
+<p>Destination: {props.selectedDesination.destination} </p>
+<p>Flight Details: {props.selectedDesination.flights} </p>
+<p>Passport Exp: {props.selectedDesination.passport} </p>
+<p>Dates: {props.selectedDesination.dates} </p>
+<p>Length of Stay: {props.selectedDesination.length} </p>
+<p>Visa Required: {props.selectedDesination.visa} </p>
+<p>Insurance Policy Number: {props.selectedDesination.insurance} </p>
+<p>Hotel: {props.selectedDesination.hotel} </p>
+<p>Tour: {props.selectedDesination.tour} </p>
+<p>Expected Temperature: {props.selectedDesination.temps} </p>
+<p>Expenses: {props.selectedDesination.expenses} </p>
 
-
-<form action="/edit" method="post">
-     <input  type="hidden" name="id" value="">
+  <form>
+     <input  type="text" name="id" value="" />
      <button>Update Information</button>
-   </form>
+  </form>
 
-  
-
-<a href="/destination"><button type="button" name="button">Menu</button></a>
+</div>
+)}

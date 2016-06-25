@@ -1,21 +1,23 @@
-import request from 'superagent'
+import { getTravelInfo } from './api'
 
 export const SHOW_DESTINATION = 'SHOW_DESTINATION'
 export const REQUEST_DESTINATION = 'REQUEST_DESTINATION'
+export const RECEIVE_DESTINATION = 'RECEIVE_DESTINATION'
 
-export const requestApi = (id) => {
+export const requestApi = (data) => {
   return (dispatch) => {
-    const target = `http://localhost:3000/trips`
-    request.get(target, (err, data) => {
-      if (err) console.log(err);
-      console.log('target', target);
-      const destinationInfo = JSON.parse(data.text).map ()
-    })
+    console.log('getting api');
+    }
+}
+
+export function receiveApi (data) {
+  return {
+    type: RECEIVE_DESTINATION
+
   }
 }
 
-
-export const showDestination(id) {
+export function showDestination (id) {
   return {
     type: SHOW_DESTINATION,
     id: id

@@ -1,11 +1,11 @@
 import {SHOW_DESTINATION} from './actions'
 
 const INITIAL_STATE = {
-  selectedDesination: null,
+  selectedDesination: 1,
   destinations: [{
     id: 1,
     destination: 'Timbuktu',
-    description: 'Choochoo'
+    description: 'Choochoo is the description'
   }]
 }
 

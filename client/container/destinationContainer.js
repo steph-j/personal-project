@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 
 import Dest from '../components/Dest'
-import {showDestination} from '../actions'
+import {showDestination, receiveApi} from '../actions'
+import {getTravelInfo} from '../api'
 
 const mapStateToProps = (state) => {
   return{
@@ -12,6 +13,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     showDestination: (id) => {
+      // dispatch(actions.requestApi(data))
+      // dispatch(getTravelInfo(receiveApi))
       dispatch(actions.showDestination(id))
   }
   }

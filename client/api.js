@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-var travelUrl = 'http://localhost:3000/travel'
+var travelUrl = 'http://localhost:3000/trips'
 
 module.exports = {
   getTravelInfo: getTravelInfo
@@ -14,6 +14,7 @@ function getTravelInfo(callback) {
         console.log(err);
       } else {
         callback(null, res.body)
+        // console.log(res.body);
       }
     })
 }

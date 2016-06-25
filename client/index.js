@@ -1,19 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import { createStore } from 'redux'
-import {showDestination} from './actions'
+import { createStore, applyMiddleware } from 'redux'
+import { ReduxThunk } from 'redux-thunk'
+import thunk from 'redux-thunk'
+import {showDestination, requestApi, receiveApi} from './actions'
 
 import App from './components/App'
 
 import reducer from './reducer'
 
 let store = createStore(
-  reducer
+  reducer,
+ applyMiddleware(thunk)
 )
 
-store.dispatch(showDestination(1))
-console.log(store.getState());
+// function dispatchAndLog(store, action) {
+//   console.log('dispatching', action)
+//   store.dispatch(action)
+//   console.log('next state', store.getState())
+// }
+//
+// dispatchAndLog(store, requestApi(data))
 
 ReactDOM.render(
   <Provider store={store}>
