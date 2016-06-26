@@ -58,17 +58,17 @@
 	
 	var _redux = __webpack_require__(175);
 	
-	var _reduxThunk = __webpack_require__(190);
+	var _reduxThunk = __webpack_require__(194);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _actions = __webpack_require__(191);
+	var _actions = __webpack_require__(195);
 	
-	var _App = __webpack_require__(199);
+	var _App = __webpack_require__(203);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _reducer = __webpack_require__(203);
+	var _reducer = __webpack_require__(207);
 	
 	var _reducer2 = _interopRequireDefault(_reducer);
 	
@@ -201,30 +201,10 @@
 	
 	var process = module.exports = {};
 	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
+	// cached from whatever global is present so that test runners that stub it don't break things.
+	var cachedSetTimeout = setTimeout;
+	var cachedClearTimeout = clearTimeout;
 	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	(function () {
-	    try {
-	        cachedSetTimeout = setTimeout;
-	    } catch (e) {
-	        cachedSetTimeout = function cachedSetTimeout() {
-	            throw new Error('setTimeout is not defined');
-	        };
-	    }
-	    try {
-	        cachedClearTimeout = clearTimeout;
-	    } catch (e) {
-	        cachedClearTimeout = function cachedClearTimeout() {
-	            throw new Error('clearTimeout is not defined');
-	        };
-	    }
-	})();
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -20627,15 +20607,15 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(177);
+	var _isPlainObject = __webpack_require__(188);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(188);
+	var _hoistNonReactStatics = __webpack_require__(192);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(189);
+	var _invariant = __webpack_require__(193);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -21925,6 +21905,168 @@
 
 /***/ },
 /* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var getPrototype = __webpack_require__(189),
+	    isHostObject = __webpack_require__(190),
+	    isObjectLike = __webpack_require__(191);
+	
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = Function.prototype.toString;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+	
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) || objectToString.call(value) != objectTag || isHostObject(value)) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+	}
+	
+	module.exports = isPlainObject;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeGetPrototype = Object.getPrototypeOf;
+	
+	/**
+	 * Gets the `[[Prototype]]` of `value`.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {null|Object} Returns the `[[Prototype]]`.
+	 */
+	function getPrototype(value) {
+	  return nativeGetPrototype(Object(value));
+	}
+	
+	module.exports = getPrototype;
+
+/***/ },
+/* 190 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Checks if `value` is a host object in IE < 9.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+	 */
+	function isHostObject(value) {
+	  // Many host objects are `Object` objects that can coerce to strings
+	  // despite having improperly defined `toString` methods.
+	  var result = false;
+	  if (value != null && typeof value.toString != 'function') {
+	    try {
+	      result = !!(value + '');
+	    } catch (e) {}
+	  }
+	  return result;
+	}
+	
+	module.exports = isHostObject;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+	}
+	
+	module.exports = isObjectLike;
+
+/***/ },
+/* 192 */
 /***/ function(module, exports) {
 
 	/**
@@ -21978,7 +22120,7 @@
 	};
 
 /***/ },
-/* 189 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -22032,7 +22174,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 190 */
+/* 194 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22060,7 +22202,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 191 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22068,26 +22210,27 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.requestApi = exports.RECEIVE_DESTINATION = exports.REQUEST_DESTINATION = exports.SHOW_DESTINATION = undefined;
+	exports.requestApi = exports.SHOW_DESTINATION = exports.RECEIVE_DESTINATION = exports.REQUEST_DESTINATION = undefined;
 	exports.receiveApi = receiveApi;
 	exports.showDestination = showDestination;
 	
-	var _api = __webpack_require__(192);
+	var _api = __webpack_require__(196);
 	
-	var SHOW_DESTINATION = exports.SHOW_DESTINATION = 'SHOW_DESTINATION';
 	var REQUEST_DESTINATION = exports.REQUEST_DESTINATION = 'REQUEST_DESTINATION';
 	var RECEIVE_DESTINATION = exports.RECEIVE_DESTINATION = 'RECEIVE_DESTINATION';
+	var SHOW_DESTINATION = exports.SHOW_DESTINATION = 'SHOW_DESTINATION';
 	
 	var requestApi = exports.requestApi = function requestApi(data) {
+	  console.log('getting api');
 	  return function (dispatch) {
-	    console.log('getting api');
+	    data;
 	  };
 	};
 	
 	function receiveApi(data) {
+	  console.log(data);
 	  return {
 	    type: RECEIVE_DESTINATION
-	
 	  };
 	}
 	
@@ -22099,12 +22242,12 @@
 	}
 
 /***/ },
-/* 192 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _superagent = __webpack_require__(193);
+	var _superagent = __webpack_require__(197);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -22128,7 +22271,7 @@
 	}
 
 /***/ },
-/* 193 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22137,10 +22280,10 @@
 	 * Module dependencies.
 	 */
 	
-	var Emitter = __webpack_require__(194);
-	var reduce = __webpack_require__(195);
-	var requestBase = __webpack_require__(196);
-	var isObject = __webpack_require__(197);
+	var Emitter = __webpack_require__(198);
+	var reduce = __webpack_require__(199);
+	var requestBase = __webpack_require__(200);
+	var isObject = __webpack_require__(201);
 	
 	/**
 	 * Root reference for iframes.
@@ -22168,7 +22311,7 @@
 	 * Expose `request`.
 	 */
 	
-	var request = module.exports = __webpack_require__(198).bind(null, Request);
+	var request = module.exports = __webpack_require__(202).bind(null, Request);
 	
 	/**
 	 * Determine XHR.
@@ -23118,7 +23261,7 @@
 	};
 
 /***/ },
-/* 194 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23282,7 +23425,7 @@
 	};
 
 /***/ },
-/* 195 */
+/* 199 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23310,7 +23453,7 @@
 	};
 
 /***/ },
-/* 196 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23318,7 +23461,7 @@
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(197);
+	var isObject = __webpack_require__(201);
 	
 	/**
 	 * Clear previous timeout.
@@ -23660,7 +23803,7 @@
 	};
 
 /***/ },
-/* 197 */
+/* 201 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23682,7 +23825,7 @@
 	module.exports = isObject;
 
 /***/ },
-/* 198 */
+/* 202 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23721,7 +23864,7 @@
 	module.exports = request;
 
 /***/ },
-/* 199 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23734,11 +23877,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Header = __webpack_require__(200);
+	var _Header = __webpack_require__(204);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _destinationContainer = __webpack_require__(201);
+	var _destinationContainer = __webpack_require__(205);
 	
 	var _destinationContainer2 = _interopRequireDefault(_destinationContainer);
 	
@@ -23757,7 +23900,7 @@
 	});
 
 /***/ },
-/* 200 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23779,13 +23922,22 @@
 	      "header",
 	      null,
 	      _react2.default.createElement(
-	        "h3",
-	        null,
-	        "Travel Mania"
+	        "div",
+	        { className: "name" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "Travel Keeper"
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "The perfect place to keep all of your plans"
+	        )
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { "class": "Login" },
+	        { className: "login" },
 	        _react2.default.createElement(
 	          "form",
 	          { action: "/info", method: "post" },
@@ -23802,7 +23954,7 @@
 	});
 
 /***/ },
-/* 201 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23813,13 +23965,13 @@
 	
 	var _reactRedux = __webpack_require__(168);
 	
-	var _Dest = __webpack_require__(202);
+	var _Dest = __webpack_require__(206);
 	
 	var _Dest2 = _interopRequireDefault(_Dest);
 	
-	var _actions = __webpack_require__(191);
+	var _actions = __webpack_require__(195);
 	
-	var _api = __webpack_require__(192);
+	var _api = __webpack_require__(196);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23831,9 +23983,14 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
+	    requestApi: function requestApi(data) {
+	      dispatch(actions.requestApi(data));
+	    },
+	    getTravelInfo: function getTravelInfo(selectedDesination) {
+	      dispatch((0, _api.getTravelInfo)(_actions.receiveApi));
+	    },
 	    showDestination: function showDestination(id) {
 	      // dispatch(actions.requestApi(data))
-	      // dispatch(getTravelInfo(receiveApi))
 	      dispatch(actions.showDestination(id));
 	    }
 	  };
@@ -23842,7 +23999,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Dest2.default);
 
 /***/ },
-/* 202 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23864,79 +24021,58 @@
 	    _react2.default.createElement(
 	      'h1',
 	      null,
-	      'You\'re nearly on your way to: ',
+	      'You\'re nearly on your way to: Paradise ',
 	      props.selectedDesination.destination
 	    ),
 	    _react2.default.createElement(
 	      'p',
 	      null,
-	      props.selectedDesination.description
+	      props.selectedDesination.description,
+	      'Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that\'s what you see at a toy store. And you must think you\'re in a toy store, because you\'re here shopping for an infant named Jeb.'
 	    ),
 	    _react2.default.createElement(
 	      'div',
-	      { 'class': 'container' },
+	      { className: 'nav' },
 	      _react2.default.createElement(
-	        'div',
-	        { 'class': 'destination-menu' },
+	        'a',
+	        { href: '#', onClick: function onClick() {
+	            return props.showDetails(selectedDesination.destination.id);
+	          } },
 	        _react2.default.createElement(
-	          'div',
-	          { 'class': 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'six columns' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'Important Info'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'six columns' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'Expenses!'
-	              )
-	            )
-	          )
-	        ),
+	          'h3',
+	          null,
+	          'Important Info'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { href: '#' },
 	        _react2.default.createElement(
-	          'div',
-	          { 'class': 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'six columns' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'Packing List'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'six columns' },
-	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              _react2.default.createElement(
-	                'h3',
-	                null,
-	                'Uploaded Photos'
-	              )
-	            )
-	          )
+	          'h3',
+	          null,
+	          'Expenses!'
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'nav' },
+	      _react2.default.createElement(
+	        'a',
+	        { href: '#' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Packing List'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { href: '#' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Uploaded Photos'
 	        )
 	      )
 	    )
@@ -23944,7 +24080,7 @@
 	};
 
 /***/ },
-/* 203 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23953,7 +24089,7 @@
 	  value: true
 	});
 	
-	var _actions = __webpack_require__(191);
+	var _actions = __webpack_require__(195);
 	
 	var INITIAL_STATE = {
 	  selectedDesination: 1,

@@ -34,6 +34,7 @@
   "homepage": "https://github.com/steph-j/personal-project#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "knex": "^0.11.5",
     "react-redux": "^4.4.5",
