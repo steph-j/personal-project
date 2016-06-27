@@ -5,8 +5,12 @@ import {showDestination, receiveApi, requestApi} from '../actions'
 import {getTravelInfo} from '../api'
 
 const mapStateToProps = (state) => {
+  let selectedDesination = state.destinations.filter(
+    (destination) => (destination.id === state.selectedDesination)
+  )[0]
+  console.log(selectedDesination);
   return{
-    selectedDesination: state.selectedDesination
+    selectedDesination: selectedDesination
   }
 }
 

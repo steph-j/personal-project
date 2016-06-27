@@ -43,3 +43,8 @@ h1 {
 p {
   width: 50%;
 }
+
+.nav button{
+  width: 100%;
+  background-color: rgb(254,99,81);
+}
