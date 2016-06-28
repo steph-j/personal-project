@@ -14,6 +14,8 @@ export default React.createClass({
     <div>
       <Header />
       <Link to="dest"><button>Current Trip</button></Link>
+      <button>Past Trips Trip</button>
+      <button>Future Trips</button>
       {this.props.children}
     </div>
     )

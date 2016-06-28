@@ -23785,6 +23785,16 @@
 	          'Current Trip'
 	        )
 	      ),
+	      _react2.default.createElement(
+	        'button',
+	        null,
+	        'Past Trips Trip'
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        null,
+	        'Future Trips'
+	      ),
 	      this.props.children
 	    );
 	  }
